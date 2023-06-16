@@ -6,7 +6,7 @@
 #    By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/15 10:54:53 by svanmeen          #+#    #+#              #
-#    Updated: 2023/06/15 14:19:48 by svanmeen         ###   ########.fr        #
+#    Updated: 2023/06/16 15:22:21 by svanmeen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SERVER_N	= server
 
 CC			= cc
 RM			= rm -f
-FLAGS		= #-Wall -Wextra -Werror
+FLAGS		= -Wall -Wextra -Werror
 
 %.o: %.c	${HSRC}
 			${CC} ${FLAGS} -c $< -o $@
@@ -43,3 +43,5 @@ clean:
 fclean:	clean
 		${RM} ${SERVER_N}
 		${RM} ${CLIENT_N}
+
+re:	fclean all
