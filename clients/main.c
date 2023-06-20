@@ -6,14 +6,14 @@
 /*   By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 11:12:58 by svanmeen          #+#    #+#             */
-/*   Updated: 2023/06/18 15:44:11 by svanmeen         ###   ########.fr       */
+/*   Updated: 2023/06/20 12:11:16 by svanmeen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 #include <time.h>
 
-void	ft_printbinary(unsigned char c, pid_t pid)
+void	ft_printbinary(int c, pid_t pid)
 {
 	int	i;
 
@@ -30,25 +30,19 @@ void	ft_printbinary(unsigned char c, pid_t pid)
 	}
 }
 
-void	ft_getchar(unsigned char *str, pid_t pid)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		ft_printbinary((unsigned char)str[i], pid);
-		i++;
-	}
-	ft_printbinary('\n', pid);
-}
-
 int	main(int argc, char **argv)
 {
 	pid_t	pid;
+	int		i;
 
+	i = 0;
 	if (argc != 3)
 		return (1);
 	pid = ft_atoi(argv[1]);
-	ft_getchar((unsigned char *)argv[2], pid);
+	while (argv[2][i])
+	{
+		ft_printbinary((int)argv[2][i], pid);
+		i++;
+	}
+	ft_printbinary('\0', pid);
 }
