@@ -6,7 +6,7 @@
 /*   By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 11:12:58 by svanmeen          #+#    #+#             */
-/*   Updated: 2023/06/16 17:25:39 by svanmeen         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:44:11 by svanmeen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,10 @@ void	ft_printbinary(unsigned char c, pid_t pid)
 	i = 0;
 	while (i < 8)
 	{
-		if ( c & 1)
-		{
+		if (c & 1)
 			kill(pid, SIGUSR1);
-			ft_printf("1"); //debug
-		}
 		else
-		{
 			kill(pid, SIGUSR2);
-			ft_printf("0"); //debug
-		}
 		i++;
 		c = c >> 1;
 		usleep(100);
@@ -40,12 +34,13 @@ void	ft_getchar(unsigned char *str, pid_t pid)
 {
 	int	i;
 
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (str[i])
 	{
 		ft_printbinary((unsigned char)str[i], pid);
-		ft_printf("\n"); //debug
+		i++;
 	}
+	ft_printbinary('\n', pid);
 }
 
 int	main(int argc, char **argv)

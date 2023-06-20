@@ -6,11 +6,15 @@
 /*   By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 11:12:58 by svanmeen          #+#    #+#             */
-/*   Updated: 2023/06/16 17:25:40 by svanmeen         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:41:48 by svanmeen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minitalk.h"
+#include <sys/types.h>
+#include <signal.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include "../libft/libft.h"
 
 unsigned char c;
 int			i;
@@ -40,8 +44,14 @@ int	ft_recursive_power(int nb, int power)
 }
 
 
-void	signal_handler(int sig)
+void	signal_handler(int sig, siginfo_t *s_info, void *ptr)
 {
+	pid_t	client;
+
+	(void)ptr;
+	client = 0;
+	if (!client)
+		client = s_info->si_pid;
 	if (sig == SIGUSR1)
 	{
 		c = c + ft_recursive_power(2, i);
@@ -59,14 +69,14 @@ void	signal_handler(int sig)
 
 int	main(void)
 {
-	pid_t	pid_s;
+	struct sigaction	sig;
+
 	i = 0;
 	c = 0;
-
-	pid_s = getpid();
-	ft_printf("%d\n", pid_s);
-	signal(SIGUSR1, signal_handler);
-	signal(SIGUSR2, signal_handler);
+	ft_printf("PID :%d\n", getpid());
+	sig.sa_sigaction = signal_handler;
+	sigaction(SIGUSR1, &sig, NULL);
+	sigaction(SIGUSR2, &sig, NULL);
 	while (1)
-		continue;
+		continue ;
 }
