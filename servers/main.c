@@ -6,15 +6,11 @@
 /*   By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 11:12:58 by svanmeen          #+#    #+#             */
-/*   Updated: 2023/06/20 12:10:34 by svanmeen         ###   ########.fr       */
+/*   Updated: 2023/06/21 13:54:35 by svanmeen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <signal.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "../libft/libft.h"
+#include "../minitalk.h"
 
 void	signal_handler(int sig)
 {
@@ -28,7 +24,7 @@ void	signal_handler(int sig)
 	if (i == 8)
 	{
 		i = 0;
-		ft_printf("%d ", c);
+		ft_printf("%c", c);
 		c = 0;
 	}
 }

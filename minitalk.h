@@ -6,7 +6,7 @@
 /*   By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 13:24:01 by svanmeen          #+#    #+#             */
-/*   Updated: 2023/06/15 13:47:44 by svanmeen         ###   ########.fr       */
+/*   Updated: 2023/06/21 13:39:00 by svanmeen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define MINITALK_H
 # include <sys/types.h>
 # include <signal.h>
+# include <stdlib.h>
 # include "libft/libft.h"
+# include <unistd.h>
+
 
 #endif
