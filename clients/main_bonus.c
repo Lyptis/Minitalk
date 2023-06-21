@@ -1,39 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 11:12:58 by svanmeen          #+#    #+#             */
-/*   Updated: 2023/06/21 15:36:35 by svanmeen         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:29:48 by svanmeen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
+#include <time.h>
 
-void	signal_handler(int sig)
+void	sig_handler(int sig)
 {
-	static int	i;
-	static int	c;
-
 	if (sig == SIGUSR1)
-		c = c + (1 << i++);
-	else
-		i++;
-	if (i == 8)
+		ft_printf("received\n");
+	exit(1);
+}
+
+void	ft_printbinary(int c, pid_t pid)
+{
+	int	i;
+
+	i = 0;
+	while (i < 8)
 	{
-		i = 0;
-		ft_printf("%c", c);
-		c = 0;
+		if (c & 1)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		i++;
+		c = c >> 1;
+		usleep(100);
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	ft_printf("PID :%d\n", getpid());
-	signal(SIGUSR1, signal_handler);
-	signal(SIGUSR2, signal_handler);
-	while (1)
-		continue ;
+	pid_t	pid;
+	int		i;
+
+	i = 0;
+	if (argc != 3)
+		return (1);
+	pid = ft_atoi(argv[1]);
+	signal(SIGUSR1, sig_handler);
+	while (argv[2][i])
+	{
+		ft_printbinary((int)argv[2][i], pid);
+		i++;
+	}
+	ft_printbinary('\0', pid);
+	pause();
 }
