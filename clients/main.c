@@ -6,12 +6,26 @@
 /*   By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 11:12:58 by svanmeen          #+#    #+#             */
-/*   Updated: 2023/06/20 12:11:16 by svanmeen         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:04:44 by svanmeen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 #include <time.h>
+
+char	*check_arg(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < 48 || str[i] > 57)
+			return ("0");
+		i++;
+	}
+	return (str);
+}
 
 void	ft_printbinary(int c, pid_t pid)
 {
@@ -37,8 +51,10 @@ int	main(int argc, char **argv)
 
 	i = 0;
 	if (argc != 3)
-		return (1);
-	pid = ft_atoi(argv[1]);
+		return (ft_printf("%sInvalid Arg\n%s", KRED, KNORMAL));
+	pid = ft_atoi(check_arg(argv[1]));
+	if (pid == 0)
+		return (ft_printf("%sInvalid PID\n%s", KRED, KNORMAL));
 	while (argv[2][i])
 	{
 		ft_printbinary((int)argv[2][i], pid);

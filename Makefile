@@ -6,7 +6,7 @@
 #    By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/15 10:54:53 by svanmeen          #+#    #+#              #
-#    Updated: 2023/06/21 17:33:46 by svanmeen         ###   ########.fr        #
+#    Updated: 2023/06/22 14:46:57 by svanmeen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SERVER_N	= server
 
 CC			= cc
 RM			= rm -f
-FLAGS		= -Wall -Wextra -Werror
+FLAGS		= -Wall -Wextra -Werror -g3
 
 %.o: %.c	${HSRC}
 			${CC} ${FLAGS} -c $< -o $@
@@ -38,15 +38,15 @@ ${SERVER_N}:	${DIR_S}${OBJS}
 				make -C libft
 				${CC} -o $@ ${DIR_S}${OBJS} -L libft -lft
 
-bonus:	${SERVER_N}_bonus ${CLIENT_N}_bonus
+bonus:	fclean ${SERVER_N}_bonus ${CLIENT_N}_bonus
 
 ${SERVER_N}_bonus:	${DIR_S}${OBJSB}
 				make -C libft
-				${CC} -o $@ ${DIR_S}${OBJSB} -L libft -lft
+				${CC} -o ${SERVER_N} ${DIR_S}${OBJSB} -L libft -lft
 
 ${CLIENT_N}_bonus:	${DIR_C}${OBJSB}
 				make -C libft
-				${CC} -o $@ ${DIR_C}${OBJSB} -L libft -lft
+				${CC} -o ${CLIENT_N} ${DIR_C}${OBJSB} -L libft -lft
 
 clean:
 		${RM} ${DIR_C}${OBJS}
@@ -57,7 +57,5 @@ clean:
 fclean:	clean
 		${RM} ${SERVER_N}
 		${RM} ${CLIENT_N}
-		${RM} ${SERVER_N}_bonus
-		${RM} ${CLIENT_N}_bonus
 
 re:	fclean all

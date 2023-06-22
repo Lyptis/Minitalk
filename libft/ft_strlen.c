@@ -6,7 +6,7 @@
 /*   By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:00:23 by svanmeen          #+#    #+#             */
-/*   Updated: 2022/11/07 15:28:43 by svanmeen         ###   ########.fr       */
+/*   Updated: 2023/06/22 11:54:11 by svanmeen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 	{
 		i++;

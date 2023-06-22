@@ -6,16 +6,40 @@
 /*   By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 11:12:58 by svanmeen          #+#    #+#             */
-/*   Updated: 2023/06/21 15:36:35 by svanmeen         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:57:51 by svanmeen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
+char	*add_to_string(char *str, char c)
+{
+	char	*res;
+	size_t	len;
+	size_t	i;
+
+	i = 0;
+	len = ft_strlen(str);
+	res = malloc(sizeof(char) * (len + 2));
+	if (!res)
+		return (NULL);
+	while (str && str[i])
+	{
+		res[i] = str[i];
+		i++;
+	}
+	res[i] = c;
+	res[++i] = '\0';
+	if (str != NULL)
+		free(str);
+	return (res);
+}
+
 void	signal_handler(int sig)
 {
 	static int	i;
 	static int	c;
+	static char	*str;
 
 	if (sig == SIGUSR1)
 		c = c + (1 << i++);
@@ -23,8 +47,18 @@ void	signal_handler(int sig)
 		i++;
 	if (i == 8)
 	{
+		if (c == 0)
+		{
+			if (str)
+			{
+				ft_printf("%s", str);
+				free(str);
+			}
+			str = NULL;
+		}
+		else
+			str = add_to_string(str, c);
 		i = 0;
-		ft_printf("%c", c);
 		c = 0;
 	}
 }
