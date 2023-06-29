@@ -6,7 +6,7 @@
 /*   By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 11:12:58 by svanmeen          #+#    #+#             */
-/*   Updated: 2023/06/22 14:51:59 by svanmeen         ###   ########.fr       */
+/*   Updated: 2023/06/29 10:35:02 by svanmeen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 void	received(char *str, pid_t client)
 {
-	if (!str)
-	{
-		kill(client, SIGUSR1);
-		return ;
-	}
-	ft_printf("%s", str);
+	kill(client, SIGUSR1);
+	if (str)
+		ft_printf("%s", str);
 	free(str);
-	
 }
 
 char	*add_to_string(char *str, char c)

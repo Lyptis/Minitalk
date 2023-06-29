@@ -6,7 +6,7 @@
 /*   By: svanmeen <svanmeen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 11:12:58 by svanmeen          #+#    #+#             */
-/*   Updated: 2023/06/22 15:06:29 by svanmeen         ###   ########.fr       */
+/*   Updated: 2023/06/29 10:37:56 by svanmeen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	ft_printbinary('\0', pid);
-	pause();
+	sleep(10);
+	ft_printf("%sTimeout%s\n", KRED, KNORMAL);
 }
